@@ -1,0 +1,188 @@
+import { canObserve } from "@/components/motion/ease";
+import { useSeen } from "@/components/motion/useSeen";
+import React, { useRef } from "react";
+import {
+  CHECK_STATUS_LABEL,
+  FRESHNESS_LABEL,
+  formatWhen,
+  heatLevel,
+  monthLabel,
+} from "@/lib/github";
+import { TILE } from "@/components/ui/GlassCard";
+import { cn } from "@/lib/cn";
+import type {
+  GithubCalendarWeek,
+  GithubChecklistItem,
+  GithubPeriodTotal,
+  GithubSourceInfo,
+} from "@/types/contract";
+
+/** Where the data came from and how old it is. Always a saved copy, never live. */
+export const SourceNote: React.FC<{ source: GithubSourceInfo }> = ({ source }) => (
+  <p className="text-xs text-ink-muted">
+    From GitHub @{source.login} · saved copy synchronised {formatWhen(source.synced_at)}
+    {source.from && source.to ? ` · covers ${source.from} to ${source.to}` : ""} ·{" "}
+    {FRESHNESS_LABEL[source.freshness]}
+  </p>
+);
+
+// A neutral ink scale, deliberately not red (reads as an error) or green (reads as verified): GitHub activity is context.
+const LEVEL = [
+  "bg-surface-200",
+  "bg-[#CFC8B6]",
+  "bg-[#9D9582]",
+  "bg-[#5C564B]",
+  "bg-ink-primary",
+];
+
+/** Heatmap drawn with plain divs; the numbers are repeated as text in the monthly table below it. */
+export const Heatmap: React.FC<{
+  weeks: GithubCalendarWeek[];
+  total: number | null;
+  from: string | null;
+  to: string | null;
+}> = ({ weeks, total, from, to }) => {
+  const max = Math.max(0, ...weeks.flatMap((w) => w.days.map((d) => d.count)));
+  // The grid sweeps in once, a column at a time, the first time it is seen. The numbers are in the document throughout.
+  const ref = useRef<HTMLDivElement>(null);
+  const armed = canObserve();
+  const seen = useSeen(ref as React.RefObject<Element>, "0px 0px -8% 0px");
+  const cols = {
+    gridTemplateColumns: `repeat(${Math.max(1, weeks.length)}, minmax(0, 1fr))`,
+  };
+  return (
+    <div
+      ref={ref}
+      className="heat"
+      data-armed={armed ? "true" : "false"}
+      data-seen={seen ? "true" : "false"}
+    >
+      <div className="flex max-w-4xl gap-2">
+        <div aria-hidden="true" className="flex w-6 shrink-0 flex-col">
+          <div className="mb-1 h-[14px]" />
+          <div className="grid flex-1 grid-rows-7 gap-[2px] text-[10px] leading-none text-ink-muted">
+            {["", "Mon", "", "Wed", "", "Fri", ""].map((d, i) => (
+              <span key={i} className="flex items-center">
+                {d}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="min-w-0 flex-1">
+          {/* Month names above the first week of each month, so a year of squares can be read at a glance. */}
+          <div
+            aria-hidden="true"
+            className="mb-1 grid h-[14px] w-full gap-[2px] text-[11px] leading-none text-ink-muted"
+            style={cols}
+          >
+            {weeks.map((w, wi) => {
+              const month = w.starts_on.slice(0, 7);
+              const first = wi === 0 || weeks[wi - 1]!.starts_on.slice(0, 7) !== month;
+              return (
+                <span key={w.starts_on} className="overflow-visible whitespace-nowrap">
+                  {first && wi < weeks.length - 2
+                    ? new Date(`${month}-01T00:00:00Z`).toLocaleDateString(undefined, {
+                        month: "short",
+                        timeZone: "UTC",
+                      })
+                    : ""}
+                </span>
+              );
+            })}
+          </div>
+          {/* The grid shares the available width instead of scrolling sideways: every cell is a square that shrinks with the screen. */}
+          <div
+            role="img"
+            aria-label={`Contribution heatmap from ${from ?? "?"} to ${to ?? "?"}: ${total ?? 0} contributions in total. Monthly totals are listed below.`}
+            className="grid w-full gap-[2px]"
+            style={cols}
+          >
+            {weeks.map((w, wi) => (
+              <div
+                key={w.starts_on}
+                className="heat-col grid gap-[2px]"
+                style={{ "--i": wi } as React.CSSProperties}
+              >
+                {w.days.map((d) => (
+                  <div
+                    key={d.date}
+                    title={`${d.date}: ${d.count} contribution${d.count === 1 ? "" : "s"}`}
+                    className={cn(
+                      "aspect-square w-full rounded-[3px]",
+                      LEVEL[heatLevel(d.count, max)]
+                    )}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <p className="mt-3 text-xs text-ink-muted">
+        Darker squares mean more contributions that day, relative to your busiest day.
+      </p>
+    </div>
+  );
+};
+
+export const PeriodBars: React.FC<{
+  rows: GithubPeriodTotal[];
+  label: string;
+  month?: boolean;
+}> = ({ rows, label, month }) => {
+  const max = Math.max(1, ...rows.map((r) => r.total));
+  return (
+    <ul aria-label={label} className="flex flex-col gap-2">
+      {rows.map((r) => (
+        <li key={r.period} className="flex items-center gap-3 text-sm">
+          <span className="w-24 shrink-0 text-ink-secondary">
+            {month ? monthLabel(r.period) : r.period.slice(5)}
+          </span>
+          <div
+            className="h-2 flex-1 overflow-hidden rounded-full bg-surface-200"
+            aria-hidden="true"
+          >
+            <div
+              className="h-full rounded-full bg-ink-primary"
+              style={{ width: `${(r.total / max) * 100}%` }}
+            />
+          </div>
+          <span className="num w-10 text-right text-ink-primary">{r.total}</span>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const MARK = { pass: "✓", fail: "✗", unknown: "?" } as const;
+
+/** Observed facts per repository. The status is words plus a symbol, never colour alone. */
+export const Checklist: React.FC<{ items: GithubChecklistItem[] }> = ({ items }) => {
+  const byRepo = new Map<string, GithubChecklistItem[]>();
+  for (const i of items)
+    byRepo.set(i.repository, [...(byRepo.get(i.repository) ?? []), i]);
+  return (
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-3 lg:grid-cols-2">
+      {[...byRepo.entries()].map(([repo, list]) => (
+        <section
+          key={repo}
+          aria-label={`Checklist for ${repo}`}
+          className={cn(TILE, "p-4")}
+        >
+          <h3 className="text-[15px] font-semibold text-ink-primary">{repo}</h3>
+          <ul className="mt-2 flex flex-col gap-1.5">
+            {list.map((i) => (
+              <li key={i.check} className="text-sm">
+                <span className="font-medium text-ink-primary">
+                  <span aria-hidden="true">{MARK[i.status]} </span>
+                  {i.label}: {CHECK_STATUS_LABEL[i.status]}
+                </span>
+                <span className="block text-xs text-ink-muted">{i.evidence}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+};

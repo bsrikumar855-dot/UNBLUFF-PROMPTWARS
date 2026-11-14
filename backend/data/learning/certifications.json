@@ -1,0 +1,21 @@
+{
+  "_note": "Curated, hand-written. A certification name matching any keyword (whole words, case-insensitive) is credited with the listed topics as DECLARED skills only (never verified; the 40% cap applies). Only topics that exist in graph.json are allowed. Deliberately NOT mapped because the graph has no cloud-basics topic: AWS Cloud Practitioner, Azure Fundamentals (AZ-900), Google Cloud Digital Leader. A certification no rule matches is kept on the profile and adds no skill.",
+  "rules": [
+    { "id": "meta-frontend", "keywords": ["meta front-end developer", "meta front end developer"], "topics": ["css", "html", "javascript", "react"] },
+    { "id": "meta-backend", "keywords": ["meta back-end developer", "meta back end developer"], "topics": ["git", "python", "sql"] },
+    { "id": "fcc-responsive-web", "keywords": ["freecodecamp responsive web design"], "topics": ["css", "html"] },
+    { "id": "fcc-javascript", "keywords": ["freecodecamp javascript algorithms and data structures"], "topics": ["javascript"] },
+    { "id": "python-institute", "keywords": ["pcep", "pcap", "certified entry-level python programmer", "certified associate in python programming"], "topics": ["python"] },
+    { "id": "oracle-sql", "keywords": ["oracle database sql", "1z0-071"], "topics": ["sql"] },
+    { "id": "google-data-analytics", "keywords": ["google data analytics"], "topics": ["data_cleaning", "data_viz", "sql"] },
+    { "id": "ibm-data-science", "keywords": ["ibm data science"], "topics": ["data_viz", "python", "sql"] },
+    { "id": "tensorflow-developer", "keywords": ["tensorflow developer"], "topics": ["deep_learning"] },
+    { "id": "kubernetes-docker", "keywords": ["certified kubernetes administrator", "certified kubernetes application developer", "cka", "ckad", "docker certified associate"], "topics": ["containers"] },
+    { "id": "terraform", "keywords": ["terraform associate"], "topics": ["iac_cloud"] },
+    { "id": "github-actions", "keywords": ["github actions"], "topics": ["ci_cd"] },
+    { "id": "github-foundations", "keywords": ["github foundations"], "topics": ["git"] },
+    { "id": "networking", "keywords": ["comptia network+", "network+", "ccna", "cisco certified network associate"], "topics": ["networking"] },
+    { "id": "linux-admin", "keywords": ["linux foundation certified system administrator", "lfcs", "rhcsa", "red hat certified system administrator", "comptia linux+"], "topics": ["linux_shell"] },
+    { "id": "istqb", "keywords": ["istqb"], "topics": ["testing"] }
+  ]
+}

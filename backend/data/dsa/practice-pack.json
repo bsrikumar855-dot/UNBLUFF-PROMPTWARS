@@ -1,0 +1,510 @@
+{
+  "schema_version": 1,
+  "source": {
+    "name": "UNBLUFF first-party practice pack",
+    "license_status": "own_work",
+    "license_note": "Written by the UNBLUFF project for this application. Not copied from any third-party problem set and not a company interview question.",
+    "url": null,
+    "imported_at": "2026-01-01T00:00:00.000Z",
+    "source_updated_at": null
+  },
+  "companies": [],
+  "questions": [
+    {
+      "id": "fp_001_balanced_brackets",
+      "title": "Balanced Brackets",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Stack",
+        "Strings"
+      ]
+    },
+    {
+      "id": "fp_002_pair_count",
+      "title": "Pair Count",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Arrays",
+        "Hash Table"
+      ]
+    },
+    {
+      "id": "fp_003_longest_run",
+      "title": "Longest Run",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Strings",
+        "Two Pointers"
+      ]
+    },
+    {
+      "id": "fp_004_first_not_less",
+      "title": "First Not Less",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Arrays",
+        "Binary Search"
+      ]
+    },
+    {
+      "id": "fp_005_coin_ways",
+      "title": "Coin Ways",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Arrays",
+        "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "fp_006_shortest_hops",
+      "title": "Shortest Hops",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Breadth-First Search",
+        "Graphs"
+      ]
+    },
+    {
+      "id": "fp_007_covered_time",
+      "title": "Covered Time",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Intervals",
+        "Sorting"
+      ]
+    },
+    {
+      "id": "fp_008_window_distinct",
+      "title": "Window Distinct",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Hash Table",
+        "Sliding Window"
+      ]
+    },
+    {
+      "id": "fp_009_island_count",
+      "title": "Island Count",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Graphs",
+        "Matrix"
+      ]
+    },
+    {
+      "id": "fp_010_edit_cost",
+      "title": "Edit Cost",
+      "url": null,
+      "difficulty": "hard",
+      "topics": [
+        "Dynamic Programming",
+        "Strings"
+      ]
+    },
+    {
+      "id": "fp_011_max_gap",
+      "title": "Max Gap",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Arrays",
+        "Sorting"
+      ]
+    },
+    {
+      "id": "fp_012_mirror_phrase",
+      "title": "Mirror Phrase",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Strings",
+        "Two Pointers"
+      ]
+    },
+    {
+      "id": "fp_013_missing_number",
+      "title": "Missing Number",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Arrays",
+        "Hash Table"
+      ]
+    },
+    {
+      "id": "fp_014_range_sums",
+      "title": "Range Sums",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Arrays"
+      ]
+    },
+    {
+      "id": "fp_015_stair_ways",
+      "title": "Stair Ways",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "fp_016_anagram_check",
+      "title": "Anagram Check",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Hash Table",
+        "Sorting",
+        "Strings"
+      ]
+    },
+    {
+      "id": "fp_017_peak_count",
+      "title": "Peak Count",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Arrays"
+      ]
+    },
+    {
+      "id": "fp_018_best_stretch",
+      "title": "Best Stretch",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Arrays",
+        "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "fp_019_rotate_right",
+      "title": "Rotate Right",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Arrays",
+        "Two Pointers"
+      ]
+    },
+    {
+      "id": "fp_020_triple_zero",
+      "title": "Triple Zero",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Arrays",
+        "Sorting",
+        "Two Pointers"
+      ]
+    },
+    {
+      "id": "fp_021_longest_unique_stretch",
+      "title": "Longest Unique Stretch",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Hash Table",
+        "Sliding Window",
+        "Strings"
+      ]
+    },
+    {
+      "id": "fp_022_merge_overlaps",
+      "title": "Merge Overlaps",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Intervals",
+        "Sorting"
+      ]
+    },
+    {
+      "id": "fp_023_tree_depth",
+      "title": "Tree Depth",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Graphs"
+      ]
+    },
+    {
+      "id": "fp_024_cheapest_route",
+      "title": "Cheapest Route",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Graphs"
+      ]
+    },
+    {
+      "id": "fp_025_knapsack_value",
+      "title": "Knapsack Value",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "fp_026_course_plan",
+      "title": "Course Plan",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Graphs"
+      ]
+    },
+    {
+      "id": "fp_027_spiral_order",
+      "title": "Spiral Order",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Matrix"
+      ]
+    },
+    {
+      "id": "fp_028_rising_chain",
+      "title": "Rising Chain",
+      "url": null,
+      "difficulty": "hard",
+      "topics": [
+        "Binary Search",
+        "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "fp_029_window_maximums",
+      "title": "Window Maximums",
+      "url": null,
+      "difficulty": "hard",
+      "topics": [
+        "Arrays",
+        "Sliding Window"
+      ]
+    },
+    {
+      "id": "fp_030_rain_trap",
+      "title": "Rain Trap",
+      "url": null,
+      "difficulty": "hard",
+      "topics": [
+        "Arrays",
+        "Two Pointers"
+      ]
+    },
+    {
+      "id": "fp_031_warmer_days",
+      "title": "Warmer Days",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Arrays",
+        "Stack"
+      ]
+    },
+    {
+      "id": "fp_032_balance_point",
+      "title": "Balance Point",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Arrays",
+        "Prefix Sums"
+      ]
+    },
+    {
+      "id": "fp_033_lone_number",
+      "title": "Lone Number",
+      "url": null,
+      "difficulty": "easy",
+      "topics": [
+        "Bit Manipulation",
+        "Hash Table"
+      ]
+    },
+    {
+      "id": "fp_034_bit_total",
+      "title": "Bit Total",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Bit Manipulation",
+        "Math"
+      ]
+    },
+    {
+      "id": "fp_035_fewest_coins",
+      "title": "Fewest Coins",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "fp_036_equal_halves",
+      "title": "Equal Halves",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Arrays",
+        "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "fp_037_ship_capacity",
+      "title": "Ship Capacity",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Arrays",
+        "Binary Search"
+      ]
+    },
+    {
+      "id": "fp_038_most_frequent",
+      "title": "Most Frequent",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Hash Table",
+        "Sorting"
+      ]
+    },
+    {
+      "id": "fp_039_busiest_moment",
+      "title": "Busiest Moment",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Intervals",
+        "Sorting"
+      ]
+    },
+    {
+      "id": "fp_040_friend_groups",
+      "title": "Friend Groups",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Graphs",
+        "Union Find"
+      ]
+    },
+    {
+      "id": "fp_041_longest_mirror",
+      "title": "Longest Mirror",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Strings",
+        "Two Pointers"
+      ]
+    },
+    {
+      "id": "fp_042_decode_count",
+      "title": "Decode Count",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Dynamic Programming",
+        "Strings"
+      ]
+    },
+    {
+      "id": "fp_043_fewest_jumps",
+      "title": "Fewest Jumps",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Dynamic Programming",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "fp_044_target_subsets",
+      "title": "Target Subsets",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Backtracking",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "fp_045_next_arrangement",
+      "title": "Next Arrangement",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Arrays",
+        "Two Pointers"
+      ]
+    },
+    {
+      "id": "fp_046_spreading_spoilage",
+      "title": "Spreading Spoilage",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Breadth-First Search",
+        "Matrix"
+      ]
+    },
+    {
+      "id": "fp_047_cheapest_network",
+      "title": "Cheapest Network",
+      "url": null,
+      "difficulty": "hard",
+      "topics": [
+        "Graphs",
+        "Greedy",
+        "Union Find"
+      ]
+    },
+    {
+      "id": "fp_048_widest_skyline",
+      "title": "Widest Skyline",
+      "url": null,
+      "difficulty": "hard",
+      "topics": [
+        "Arrays",
+        "Stack"
+      ]
+    },
+    {
+      "id": "fp_049_shared_subsequence",
+      "title": "Shared Subsequence",
+      "url": null,
+      "difficulty": "medium",
+      "topics": [
+        "Dynamic Programming",
+        "Strings"
+      ]
+    },
+    {
+      "id": "fp_050_running_median",
+      "title": "Running Median",
+      "url": null,
+      "difficulty": "hard",
+      "topics": [
+        "Heap",
+        "Sorting"
+      ]
+    }
+  ],
+  "associations": []
+}

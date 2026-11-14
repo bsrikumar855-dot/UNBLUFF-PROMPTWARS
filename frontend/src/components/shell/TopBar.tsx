@@ -1,0 +1,109 @@
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Search } from "lucide-react";
+import PillNav, { type PillNavItem } from "@/components/reactbits/PillNav";
+import { useAuth } from "@/auth/context";
+import { routes } from "@/lib/routes";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { AccountMenu } from "./AccountMenu";
+
+interface Entry extends PillNavItem {
+  match?: (pathname: string) => boolean;
+}
+
+const PUBLIC: Entry[] = [
+  { label: "DSA", href: routes.dsa, match: (p) => p === "/dsa" || p.startsWith("/dsa/") },
+  {
+    label: "Patterns",
+    href: routes.learnPatterns,
+    match: (p) => p.startsWith("/learn/patterns"),
+  },
+  { label: "DBMS", href: routes.learnDbms, match: (p) => p.startsWith("/learn/dbms") },
+  { label: "Roadmap", href: routes.roadmap(), match: (p) => p === "/roadmap" },
+];
+
+/** React Bits' PillNav draws plain anchors; this hands its links to the router instead. */
+const RouterLink = React.forwardRef<
+  HTMLAnchorElement,
+  { href: string } & React.ComponentProps<"a">
+>(({ href, ...props }, ref) => <Link ref={ref} to={href} {...props} />);
+RouterLink.displayName = "RouterLink";
+
+/**
+ * The marketing header: the landing page, sign-in and what a signed-out visitor can open. A pill navigation (a fill
+ * rises through each link on hover, a dot slides to the page you are on) with the public places, and at the right the
+ * call to action, or for someone who is signed in, only the way into the app and Sign out. Signed-in students use the sidebar everywhere else. If the
+ * pills do not fit, the component folds them into its own menu.
+ */
+export const TopBar: React.FC<{
+  onSearch?: () => void;
+  right?: React.ReactNode;
+}> = ({ onSearch, right }) => {
+  const { pathname } = useLocation();
+  const { status } = useAuth();
+  const items: PillNavItem[] = PUBLIC.map(({ match: _m, ...item }) => item);
+  const active = PUBLIC.find((e) => e.match?.(pathname));
+
+  // Signed in on the landing or sign-in page: no navigation, just the way into the app and the way out. On the landing
+  // page the header floats, fully transparent, over the hero so the background runs to the top edge.
+  if (status === "signedIn")
+    return (
+      <header
+        className={
+          pathname === "/"
+            ? "fixed inset-x-0 top-0 z-40 flex h-(--topbar-h) items-center justify-end gap-2 px-3 sm:px-5"
+            : "sticky top-0 z-40 flex h-(--topbar-h) items-center justify-end gap-2 bg-surface-50/55 px-3 backdrop-blur-xl backdrop-saturate-150 sm:px-5"
+        }
+      >
+        {right}
+        <AccountMenu variant="button" />
+      </header>
+    );
+
+  return (
+    <header className="sticky top-0 z-40 grid h-(--topbar-h) grid-cols-[minmax(0,1fr)_auto] items-center gap-3 overflow-x-clip bg-surface-50/55 px-3 backdrop-blur-xl backdrop-saturate-150 sm:px-5">
+      {/* PillNav sizes itself to its parent, so give it a cell of its own that stops where the actions begin. */}
+      <div className="min-w-0">
+        <PillNav
+          logo={<img src="/brand/logo-mark.png" alt="" width={105} height={105} className="size-5 object-contain" />}
+          logoAlt="UNBLUFF home"
+          logoHref={routes.home}
+          items={items}
+          activeHref={active?.href ?? ""}
+          linkComponent={RouterLink}
+          theme="light"
+          layout="split"
+          size="md"
+          surface="glass"
+          hoverEffect="fill"
+          indicator="dot"
+          highlightColor="#b3291a"
+          highlightTextColor="#ffffff"
+          textColor="#15130f"
+          // jsdom has no layout, so "auto" would always collapse to the burger; tests exercise the full pills.
+          collapse={import.meta.env.MODE === "test" ? "never" : "auto"}
+          style={{ "--pn-surface": "rgba(246, 243, 236, 0.93)" } as React.CSSProperties}
+          ariaLabel="Primary"
+        />
+      </div>
+      <div className="flex items-center justify-end gap-2">
+        {right}
+        {onSearch && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type="button"
+                onClick={onSearch}
+                aria-label="Go to a screen"
+                className="inline-flex size-11 items-center justify-center rounded-full text-ink-secondary transition-colors hover:bg-accent hover:text-foreground"
+              >
+                <Search size={18} aria-hidden="true" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">Go to a screen (Ctrl K)</TooltipContent>
+          </Tooltip>
+        )}
+      </div>
+    </header>
+  );
+};

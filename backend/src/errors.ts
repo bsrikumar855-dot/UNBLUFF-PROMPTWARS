@@ -1,0 +1,54 @@
+import type { ErrorCode } from "./types.js";
+
+const STATUS: Record<ErrorCode, number> = {
+  BAD_REQUEST: 400,
+  UNAUTHENTICATED: 401,
+  NOT_FOUND: 404,
+  ROLE_NOT_FOUND: 404,
+  COMPANY_NOT_FOUND: 404,
+  QUESTION_NOT_FOUND: 404,
+  SUBMISSION_NOT_FOUND: 404,
+  REVISION_NOT_FOUND: 404,
+  CONVERSATION_NOT_FOUND: 404,
+  MEMORY_NOT_FOUND: 404,
+  GITHUB_NOT_CONFIGURED: 503,
+  GITHUB_NOT_CONNECTED: 409,
+  GITHUB_REAUTH_REQUIRED: 409,
+  GITHUB_RATE_LIMITED: 429,
+  GITHUB_UNAVAILABLE: 502,
+  PLACEMENT_PROFILE_REQUIRED: 409,
+  PLACEMENT_TASK_NOT_FOUND: 404,
+  GRADING_UNAVAILABLE: 409,
+  EXECUTION_UNAVAILABLE: 503,
+  SESSION_NOT_FOUND: 404,
+  CLAIM_NOT_FOUND: 404,
+  CAREER_UNAVAILABLE: 502,
+  CAREER_RATE_LIMITED: 429,
+  CAREER_JOB_NOT_FOUND: 404,
+  LEETCODE_IMPORT_INVALID: 400,
+  LEETCODE_IMPORT_CONFLICT: 409,
+  LEETCODE_UNAVAILABLE: 502,
+  LATEX_UNAVAILABLE: 503,
+  LEARN_NOT_FOUND: 404,
+  RATE_LIMITED: 429,
+  LLM_INVALID_OUTPUT: 502,
+  LLM_TIMEOUT: 504,
+  EMAIL_NOT_VERIFIED: 403,
+  DAILY_LIMIT_REACHED: 429,
+  APP_CHECK_FAILED: 403,
+  INTERNAL: 500,
+};
+
+/** An error that maps 1:1 onto the contract's `{ error: { code, message } }` shape. */
+export class ApiError extends Error {
+  readonly status: number;
+
+  constructor(
+    readonly code: ErrorCode,
+    message: string,
+  ) {
+    super(message);
+    this.name = "ApiError";
+    this.status = STATUS[code];
+  }
+}
